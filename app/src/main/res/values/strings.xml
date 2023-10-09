@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Lab 1</string>
+    <string name="button_press_count">Button press count: %d</string>
+    <string name="button_text">Add to counter</string>
+</resources>
