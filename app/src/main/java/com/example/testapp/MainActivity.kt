@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.text.DateFormat
-import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     private var counter: Int = 0
