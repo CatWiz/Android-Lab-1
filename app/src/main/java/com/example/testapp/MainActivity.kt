@@ -4,20 +4,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.testapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private var counter: Int = 0
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var vm: MyViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val textView = findViewById<TextView>(R.id.myTextView)
-        textView.text = getString(R.string.button_press_count, counter)
-    }
+        vm = ViewModelProvider(this)[MyViewModel::class.java]
+        vm.counter.observe(this) { counter ->
+            binding.myTextView.text = getString(R.string.button_press_count, counter)
+        }
 
-    fun buttonOnClick(view: View) {
-        val textView = findViewById<TextView>(R.id.myTextView)
-        textView.text = getString(R.string.button_press_count, ++counter)
+        binding.myButton.setOnClickListener {
+            vm.setCount(vm.counter.value!! + 1)
+        }
     }
 }
